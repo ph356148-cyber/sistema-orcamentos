@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Orçamentos</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+input, select {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-dashboard {
+    background: #2c3e50;
+    color: white;
+}
+
+.btn-voltar {
+    background: #7f8c8d;
+    color: white;
+}
+
+.btn-add {
+    background: #3498db;
+    color: white;
+}
+
+.btn-save {
+    background: #2ecc71;
+    color: white;
+}
+
+.btn-pdf {
+    background: #e67e22;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.btn-whats {
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.table th {
+    background: #eee;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 🔙 MENU SUPERIOR -->
+    <div class="topbar">
+        <div>
+            <a href="/dashboard">
+                <button class="btn-dashboard">🏠 Dashboard</button>
+            </a>
+
+            <button onclick="history.back()" class="btn-voltar">
+                🔙 Voltar
+            </button>
+        </div>
+    </div>
+
+    <!-- 🧾 NOVO ORÇAMENTO -->
+    <div class="card">
+        <h2>🧾 Novo Orçamento</h2>
+
+        <form method="POST">
+            <select name="cliente_id" required>
+                <option value="">Selecione um cliente</option>
+                {% for c in clientes %}
+                    <option value="{{ c.id }}">{{ c.nome }}</option>
+                {% endfor %}
+            </select>
+
+            <div id="itens">
+                <div class="item">
+                    <input type="text" name="descricao[]" placeholder="Descrição">
+                    <input type="number" name="quantidade[]" placeholder="Qtd">
+                    <input type="number" step="0.01" name="valor[]" placeholder="Valor unitário">
+                </div>
+            </div>
+
+            <button type="button" class="btn-add" onclick="addItem()">+ Adicionar Item</button>
+            <br><br>
+            <button type="submit" class="btn-save">Salvar Orçamento</button>
+        </form>
+    </div>
+
+    <!-- 📋 LISTA -->
+    <div class="card">
+        <h2>📋 Orçamentos</h2>
+
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Valor</th>
+                <th>Ação</th>
+            </tr>
+
+            {% for o in lista %}
+            <tr>
+                <td>{{ o[0] }}</td>
+                <td>{{ o[1] }}</td>
+                <td>R$ {{ "%.2f"|format(o[2]) }}</td>
+                <td style="display:flex; gap:5px;">
+                    <a href="/gerar_pdf/{{ o[0] }}" class="btn-pdf">📄 PDF</a>
+
+                    <a href="https://wa.me/5561993804232?text=Olá%20{{ o[1] }},%20segue%20seu%20orçamento:%20http://127.0.0.1:5000/gerar_pdf/{{ o[0] }}"
+                       target="_blank"
+                       class="btn-whats">
+                       📲 WhatsApp
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+<script>
+function addItem() {
+    let div = document.createElement("div");
+    div.classList.add("item");
+
+    div.innerHTML = `
+        <input type="text" name="descricao[]" placeholder="Descrição">
+        <input type="number" name="quantidade[]" placeholder="Qtd">
+        <input type="number" step="0.01" name="valor[]" placeholder="Valor">
+    `;
+
+    document.getElementById("itens").appendChild(div);
+}
+</script>
+
+</body>
+</html>

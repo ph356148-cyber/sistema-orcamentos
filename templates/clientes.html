@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Clientes</h2>
+
+<form method="POST" class="mb-4">
+    <input name="nome" placeholder="Nome" class="form-control mb-2">
+    <input name="telefone" placeholder="Telefone" class="form-control mb-2">
+    <input name="endereco" placeholder="Endereço" class="form-control mb-2">
+    <button class="btn btn-success">Salvar</button>
+</form>
+
+<input id="busca" class="form-control mb-3" placeholder="Buscar cliente...">
+
+<table class="table table-dark table-hover">
+<tr>
+    <th>Nome</th>
+    <th>Telefone</th>
+    <th>Endereço</th>
+    <th>Ação</th>
+</tr>
+
+{% for c in clientes %}
+<tr>
+    <td>{{ c[1] }}</td>
+    <td>{{ c[2] }}</td>
+    <td>{{ c[3] }}</td>
+    <td>
+        <a href="/editar_cliente/{{ c[0] }}" class="btn btn-warning btn-sm">Editar</a>
+        <a href="/deletar_cliente/{{ c[0] }}" class="btn btn-danger btn-sm">Excluir</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+<script>
+document.getElementById("busca").addEventListener("keyup", function() {
+    let filtro = this.value.toLowerCase();
+    let linhas = document.querySelectorAll("table tr");
+
+    linhas.forEach((linha, i) => {
+        if(i === 0) return;
+        linha.style.display = linha.innerText.toLowerCase().includes(filtro) ? "" : "none";
+    });
+});
+</script>
+
+{% endblock %}

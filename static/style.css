@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+/* Layout */
+.container {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    background: #020617;
+    padding: 20px;
+    position: fixed;
+}
+
+.sidebar h2 {
+    color: #22c55e;
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #94a3b8;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: #1e293b;
+    color: white;
+}
+
+/* Conteúdo */
+.content {
+    margin-left: 250px;
+    padding: 30px;
+}
+
+/* Topo */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    width: 220px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+/* Form */
+input, button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 6px;
+    border: none;
+}
+
+input {
+    background: #0f172a;
+    color: white;
+    border: 1px solid #334155;
+}
+
+button {
+    background: #22c55e;
+    color: black;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #16a34a;
+}
+
+/* Lista */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #1e293b;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 6px;
+}

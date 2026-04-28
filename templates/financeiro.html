@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Financeiro</h2>
+
+<form method="POST" class="mb-4">
+    <input name="descricao" placeholder="Descrição" class="form-control mb-2">
+    <input name="valor" placeholder="Valor" class="form-control mb-2">
+    <button class="btn btn-success">Salvar</button>
+</form>
+
+<table class="table table-dark table-hover">
+<tr>
+    <th>Descrição</th>
+    <th>Valor</th>
+    <th>Ação</th>
+</tr>
+
+{% for d in dados %}
+<tr>
+    <td>{{ d[1] }}</td>
+    <td>R$ {{ d[2] }}</td>
+    <td>
+        <a href="/deletar_financeiro/{{ d[0] }}" class="btn btn-danger btn-sm">Excluir</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 style="margin-bottom:20px;">📊 Painel</h1>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+    <!-- 💰 Financeiro -->
+    <div style="background:#1f2a40; padding:20px; border-radius:10px; width:220px;">
+        <h3>💰 Faturamento</h3>
+        <p style="font-size:20px;">R$ {{ total }}</p>
+    </div>
+
+    <!-- 🧾 Orçamentos -->
+    <div style="background:#1f2a40; padding:20px; border-radius:10px; width:220px;">
+        <h3>🧾 Orçamentos</h3>
+        <p style="font-size:20px;">R$ {{ total_orcamentos }}</p>
+    </div>
+
+    <!-- 👥 Clientes -->
+    <div style="background:#1f2a40; padding:20px; border-radius:10px; width:220px;">
+        <h3>👥 Clientes</h3>
+        <p style="font-size:20px;">{{ total_clientes }}</p>
+    </div>
+
+    <!-- 📅 Agendamentos -->
+    <div style="background:#1f2a40; padding:20px; border-radius:10px; width:220px;">
+        <h3>📅 Agendamentos</h3>
+        <p style="font-size:20px;">{{ total_agendamentos }}</p>
+    </div>
+
+</div>
+
+{% endblock %}

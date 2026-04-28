@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Agendamentos</h2>
+
+<form method="POST" class="mb-4">
+   <select name="cliente_id" class="form-control mb-2" required>
+    {% for c in clientes %}
+        <option value="{{ c.id }}">{{ c.nome }}</option>
+    {% endfor %}
+</select>
+
+    <input type="datetime-local" name="data" class="form-control mb-2" required>
+    <input name="obs" placeholder="Observação" class="form-control mb-2">
+
+    <button class="btn btn-success">Agendar</button>
+</form>
+
+<table class="table table-dark table-hover">
+<tr>
+    <th>Cliente</th>
+    <th>Data</th>
+    <th>Obs</th>
+    <th>Ação</th>
+</tr>
+
+{% for a in lista %}
+<tr>
+    <td>{{ a[1] }}</td>
+   <td>{{ a[2][:16].replace("T", " ") }}</td>
+    <td>{{ a[3] }}</td>
+    <td>
+        <a href="/deletar_agendamento/{{ a[0] }}" class="btn btn-danger btn-sm">Excluir</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}
