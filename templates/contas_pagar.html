@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 style="margin-bottom:20px;">💸 Contas a Pagar</h2>
+
+<!-- FORM -->
+<form method="POST" style="max-width:400px;">
+    <input name="descricao" placeholder="Descrição" class="form-control mb-2" required>
+
+    <input name="valor" type="number" step="0.01" placeholder="Valor (R$)" class="form-control mb-2" required>
+
+    <input name="vencimento" type="date" class="form-control mb-2" required>
+
+    <button class="btn btn-danger w-100">Adicionar Conta</button>
+</form>
+
+<hr>
+
+<!-- TABELA -->
+<table class="table table-dark table-hover">
+<tr>
+    <th>Descrição</th>
+    <th>Valor</th>
+    <th>Vencimento</th>
+    <th>Status</th>
+    <th>Ação</th>
+</tr>
+
+{% for c in contas %}
+<tr>
+    <td>{{ c["descricao"] }}</td>
+
+    <td>
+        R$ {{ "{:,.2f}".format(c["valor"]).replace(",", "X").replace(".", ",").replace("X", ".") }}
+    </td>
+
+    <td>{{ c["data_vencimento"] }}</td>
+
+    <td>
+        {% if c["status"] == "pago" %}
+            <span class="badge bg-success">Pago</span>
+        {% else %}
+            <span class="badge bg-warning text-dark">Pendente</span>
+        {% endif %}
+    </td>
+
+    <td>
+        {% if c["status"] != "pago" %}
+        <a href="/pagar_conta/{{ c['id'] }}" class="btn btn-success btn-sm">
+            Pagar
+        </a>
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

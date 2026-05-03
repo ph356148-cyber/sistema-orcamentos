@@ -1,30 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Financeiro</h2>
+<h2 style="margin-bottom:20px;">💰 Financeiro (Entradas)</h2>
 
-<form method="POST" class="mb-4">
-    <input name="descricao" placeholder="Descrição" class="form-control mb-2">
-    <input name="valor" placeholder="Valor" class="form-control mb-2">
-    <button class="btn btn-success">Salvar</button>
+<!-- FORM -->
+<form method="POST" class="mb-4" style="max-width:400px;">
+    <input name="descricao" placeholder="Descrição" class="form-control mb-2" required>
+
+    <input name="valor" type="number" step="0.01" placeholder="Valor (R$)" class="form-control mb-2" required>
+
+    <button class="btn btn-success w-100">Salvar Entrada</button>
 </form>
 
+<!-- TABELA -->
 <table class="table table-dark table-hover">
 <tr>
     <th>Descrição</th>
     <th>Valor</th>
+    <th>Data</th>
     <th>Ação</th>
 </tr>
 
 {% for d in dados %}
 <tr>
-    <td>{{ d[1] }}</td>
-    <td>R$ {{ d[2] }}</td>
+    <td>{{ d["descricao"] }}</td>
+
+    <!-- 💰 FORMATAÇÃO CORRETA -->
+    <td>R$ {{ "{:,.2f}".format(d["valor"]).replace(",", "X").replace(".", ",").replace("X", ".") }}</td>
+
+    <td>{{ d["data"] }}</td>
+
     <td>
-        <a href="/deletar_financeiro/{{ d[0] }}" class="btn btn-danger btn-sm">Excluir</a>
+        <a href="/deletar_financeiro/{{ d['id'] }}" class="btn btn-danger btn-sm">
+            Excluir
+        </a>
     </td>
 </tr>
 {% endfor %}
+
 </table>
 
 {% endblock %}

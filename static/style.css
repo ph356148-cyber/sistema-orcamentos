@@ -1,104 +1,59 @@
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Arial;
-    background: #0f172a;
-    color: #e2e8f0;
+    background: linear-gradient(135deg, #0f172a, #020617);
+    color: white;
+    font-family: Arial;
 }
 
-/* Layout */
-.container {
-    display: flex;
-}
-
-/* Sidebar */
+/* SIDEBAR */
 .sidebar {
-    width: 230px;
+    width: 220px;
     height: 100vh;
+    position: fixed;
     background: #020617;
     padding: 20px;
-    position: fixed;
+    border-right: 1px solid #1e293b;
 }
 
-.sidebar h2 {
+.sidebar h4 {
     color: #22c55e;
     margin-bottom: 30px;
 }
 
 .sidebar a {
     display: block;
-    padding: 12px;
-    margin-bottom: 10px;
-    text-decoration: none;
     color: #94a3b8;
-    border-radius: 8px;
-    transition: 0.3s;
+    margin: 12px 0;
+    text-decoration: none;
+    transition: 0.2s;
 }
 
 .sidebar a:hover {
-    background: #1e293b;
     color: white;
+    padding-left: 5px;
 }
 
-/* Conteúdo */
+/* CONTEÚDO */
 .content {
-    margin-left: 250px;
+    margin-left: 240px;
     padding: 30px;
 }
 
-/* Topo */
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-}
-
-/* Cards */
-.cards {
-    display: flex;
-    gap: 20px;
-}
-
-.card {
+/* CARDS */
+.card-dark {
     background: #1e293b;
     padding: 20px;
-    border-radius: 12px;
-    width: 220px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: 0.3s;
 }
 
-/* Form */
-input, button {
-    padding: 10px;
-    margin: 5px;
-    border-radius: 6px;
-    border: none;
+.card-dark:hover {
+    transform: translateY(-5px);
 }
 
-input {
-    background: #0f172a;
-    color: white;
-    border: 1px solid #334155;
-}
-
-button {
-    background: #22c55e;
-    color: black;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #16a34a;
-}
-
-/* Lista */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    background: #1e293b;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 6px;
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
 }

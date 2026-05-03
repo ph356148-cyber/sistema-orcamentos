@@ -11,6 +11,7 @@
 body {
     background: linear-gradient(135deg, #0f172a, #020617);
     color: white;
+    font-family: Arial;
 }
 
 .sidebar {
@@ -19,12 +20,18 @@ body {
     position: fixed;
     background: #020617;
     padding: 20px;
+    border-right: 1px solid #1e293b;
+}
+
+.sidebar h4 {
+    color: #22c55e;
+    margin-bottom: 30px;
 }
 
 .sidebar a {
     display: block;
     color: #94a3b8;
-    margin: 15px 0;
+    margin: 12px 0;
     text-decoration: none;
 }
 
@@ -42,37 +49,62 @@ body {
     padding: 20px;
     border-radius: 15px;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
 </style>
 </head>
 
 <body>
 
 <div class="sidebar">
-    <h4> One S.S</h4>
+    <h4>ONE Sistemas de Segurança</h4>
 
-    <a href="/dashboard">Dashboard</a>
-    <a href="/clientes">Clientes</a>
-    <a href="/financeiro">Financeiro</a>
-    <a href="/agendamentos">Agendamentos</a>
-    <a href="/orcamentos">Orçamentos</a>
+    <a href="/dashboard">📊 Dashboard</a>
+    <a href="/clientes">👥 Clientes</a>
+    <a href="/financeiro">💰 Caixa</a>
+    <a href="/contas_pagar">💸 Contas a Pagar</a>
+    <a href="/contas_receber">🧾 Contas a Receber</a>
+    <a href="/agendamentos">📅 Agendamentos</a>
+    <a href="/orcamentos">🧾 Orçamentos</a>
+
     <hr>
-    <a href="/logout" class="btn btn-danger">Sair</a>
-   
+    <a href="/logout" class="btn btn-danger w-100">Sair</a>
 </div>
 
 <div class="content">
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for msg in messages %}
-      <div class="alert alert-success">{{ msg }}</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-
 {% block content %}{% endblock %}
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const canvas = document.getElementById('grafico');
+
+if (canvas) {
+    const entradas = parseFloat(canvas.dataset.entradas || 0);
+    const saidas = parseFloat(canvas.dataset.saidas || 0);
+    const saldo = parseFloat(canvas.dataset.saldo || 0);
+
+    new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: ['Entradas', 'Saídas', 'Saldo'],
+            datasets: [{
+                label: 'Financeiro',
+                data: [entradas, saidas, saldo],
+                borderWidth: 2,
+                tension: 0.4
+            }]
+        }
+    });
+}
+</script>
 
 </body>
 </html>

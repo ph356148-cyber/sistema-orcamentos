@@ -1,34 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 style="margin-bottom:20px;">📊 Painel</h1>
+<h2>📊 Dashboard Financeiro</h2>
 
-<div style="display:flex; gap:20px; flex-wrap:wrap;">
+<div class="grid">
 
-    <!-- 💰 Financeiro -->
-    <div style="background:#1f2a40; padding:20px; border-radius:10px; width:220px;">
-        <h3>💰 Faturamento</h3>
-        <p style="font-size:20px;">R$ {{ total }}</p>
-    </div>
+<div class="card-dark">
+    <h4>💰 Caixa</h4>
+    <p>R$ {{ Caixa_formatado }}</p>
+</div>
 
-    <!-- 🧾 Orçamentos -->
-    <div style="background:#1f2a40; padding:20px; border-radius:10px; width:220px;">
-        <h3>🧾 Orçamentos</h3>
-        <p style="font-size:20px;">R$ {{ total_orcamentos }}</p>
-    </div>
+<div class="card-dark">
+    <h4>💸 Saídas</h4>
+    <p>R$ {{ saidas_formatado }}</p>
+</div>
 
-    <!-- 👥 Clientes -->
-    <div style="background:#1f2a40; padding:20px; border-radius:10px; width:220px;">
-        <h3>👥 Clientes</h3>
-        <p style="font-size:20px;">{{ total_clientes }}</p>
-    </div>
+<div class="card-dark">
+    <h4>📈 Saldo</h4>
+    <p>R$ {{ saldo_formatado }}</p>
+</div>
 
-    <!-- 📅 Agendamentos -->
-    <div style="background:#1f2a40; padding:20px; border-radius:10px; width:220px;">
-        <h3>📅 Agendamentos</h3>
-        <p style="font-size:20px;">{{ total_agendamentos }}</p>
-    </div>
+<div class="card-dark">
+    <h4>⚠️ A pagar</h4>
+    <p>R$ {{ a_pagar_formatado }}</p>
+</div>
 
+<div class="card-dark">
+    <h4>🧾 A receber</h4>
+    <p>R$ {{ a_receber_formatado }}</p>
+</div>
+
+</div>
+
+<div class="card-dark" style="margin-top:30px;">
+    <h4>📊 Fluxo Financeiro</h4>
+    <canvas id="grafico"
+    data-entradas="{{ entradas }}"
+    data-saidas="{{ saidas }}"
+    data-saldo="{{ saldo }}">
+</canvas>
 </div>
 
 {% endblock %}
